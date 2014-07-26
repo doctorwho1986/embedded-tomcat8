@@ -37,6 +37,7 @@ public class MyFilter implements Filter {
 			System.out.println(string + "----" + requestAttributes.getRequest().getHeader(string));
 			response2.setHeader(string, requestAttributes.getRequest().getHeader(string));
 		}
+		chain.doFilter(request, response2);
 	}
 
 	@Override

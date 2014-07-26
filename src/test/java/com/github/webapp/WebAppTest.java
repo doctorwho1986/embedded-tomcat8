@@ -20,7 +20,7 @@ public class WebAppTest {
 		tomcat.setHostname("localhost");
 		tomcat.setBaseDir(prjectPath+"/temp");
 
-		Context context = tomcat.addWebapp("/webapp", prjectPath +"/src/test/resources/webapps/webapp");
+		tomcat.addWebapp("/webapp", prjectPath +"/src/test/resources/webapps/webapp");
 		tomcat.start();
 		tomcat.getServer().await();
 	}
