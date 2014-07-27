@@ -19,6 +19,10 @@ public class EmbeddedTomcat {
 	private Tomcat tomcat;
 	private String basedir = new File("").getAbsolutePath();
 	private Map<String, Context> context = new HashMap<String, Context>();
+	
+	public EmbeddedTomcat() {
+		this(8080, "localhost");
+	}
 	public  EmbeddedTomcat(int port, String hostName) {
 		tomcat = new Tomcat();
 		tomcat.setPort(port);
@@ -26,8 +30,13 @@ public class EmbeddedTomcat {
 		tomcat.setBaseDir(basedir +"/temp");
 	}
 	
-	public void addWebApp(String contextPath, String baseDir) throws ServletException {
-		Context context = tomcat.addWebapp(contextPath, this.basedir + baseDir);
+	public void addWebApp(String contextPath, String baseDir)  {
+		Context context = null;
+		try {
+			context = tomcat.addWebapp(contextPath, this.basedir + baseDir);
+		} catch (ServletException e) {
+			throw new RuntimeException("add web app error",e);
+		}
 		this.context.put(contextPath, context);
 	}
 	
