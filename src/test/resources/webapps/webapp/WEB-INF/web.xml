@@ -34,23 +34,6 @@
 	</servlet-mapping>
 
 
-	<filter>
-		<filter-name>DelegatingFilterProxy</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-		<init-param>
-			<param-name>targetBeanName</param-name>
-			<!-- spring中bean的id -->
-			<param-value>myFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>targetFilterLifecycle</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>DelegatingFilterProxy</filter-name>
-		<url-pattern>*</url-pattern>
-	</filter-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
