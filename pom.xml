@@ -18,6 +18,7 @@
 		<guava.version>17.0</guava.version>
 		<commons-io.version>2.4</commons-io.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<httpclient.version>4.3.4</httpclient.version>
 	</properties>
 
 	<dependencies>
@@ -113,10 +114,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+
 	</dependencies>
 </project>
