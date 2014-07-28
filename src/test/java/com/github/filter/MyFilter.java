@@ -18,16 +18,26 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class MyFilter implements Filter {
 
-	@Override
+
+	
+	
+
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
 		System.out.println("------init  MyFilter");
+		
 	}
 
-	@Override
+
+
+	public void destroy() {
+		System.out.println("------destroy  MyFilter");
+		
+	}
+
+
+
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		System.out.println("------doFilter  MyFilter");
 		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		Enumeration<String> headerNames = requestAttributes.getRequest().getHeaderNames();
@@ -38,12 +48,7 @@ public class MyFilter implements Filter {
 			response2.setHeader(string, requestAttributes.getRequest().getHeader(string));
 		}
 		chain.doFilter(request, response2);
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		System.out.println("------destroy  MyFilter");
+		
 	}
 
 }
