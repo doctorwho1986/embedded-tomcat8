@@ -2,11 +2,18 @@ package com.github.host;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+
+
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +64,36 @@ public class Hosts {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Hosts.addHost("127.0.0.1", "www.cui.com");
+	public static void main(String[] args) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, UnknownHostException {
+		Class<InetAddress> klass = InetAddress.class;
+		String cacheName = "addressCache";
+	    Field acf = klass.getDeclaredField(cacheName);
+	    acf.setAccessible(true);
+	    Object addressCache = acf.get(null);
+	    Class cacheKlass = addressCache.getClass();
+	    Field cf = cacheKlass.getDeclaredField("cache");
+	    
+	    cf.setAccessible(true);
+	    Map<String, Object> cache = (Map<String, Object>) cf.get(addressCache);
+	    InetAddress address2 = InetAddress.getByAddress("www.cui8.com", new byte[]{(byte)127,0,0,1} );
+	    cache.put("www.cui8.com", address2);
+	    System.out.println(cache.size());
+	    for (Map.Entry<String, Object> hi : cache.entrySet()) {
+//	        Object cacheEntry = hi.getValue();
+//	        Class cacheEntryKlass = cacheEntry.getClass();
+//	        Field expf = cacheEntryKlass.getDeclaredField("expiration");
+//	        expf.setAccessible(true);
+//	        long expires = (Long) expf.get(cacheEntry);
+//	 
+//	        Field af = cacheEntryKlass.getDeclaredField("address");
+//	        af.setAccessible(true);
+//	        InetAddress[] addresses = (InetAddress[]) af.get(cacheEntry);
+//	        List<String> ads = new ArrayList<String>(addresses.length);
+//	        for (InetAddress address : addresses) {
+//	            ads.add(address.getHostAddress());
+//	        }
+//	 
+//	        System.out.println(hi.getKey() + " "+new Date(expires) +" " +ads);
+	    }
 	}
 }

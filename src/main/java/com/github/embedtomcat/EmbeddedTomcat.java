@@ -75,6 +75,14 @@ public class EmbeddedTomcat {
 		tomcat.getServer().await();
 	}
 	
+	public void start() {
+		try {
+			tomcat.start();
+		} catch (LifecycleException e) {
+			throw new RuntimeException("tomcat start error");
+		}
+	}
+	
 	public void stop(){
 		try {
 			tomcat.stop();
